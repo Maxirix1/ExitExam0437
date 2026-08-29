@@ -9,13 +9,15 @@
 ## 2. ตารางเชื่อมโยง Requirements
 
 
-| Requirement | Model / Domain | Controller / Action | View / Screen |
-| ----------- | -------------- | ------------------- | ------------- |
-| R1          |                |                     |               |
-| R2          |                |                     |               |
-| R3          |                |                     |               |
-| R4          |                |                     |               |
-| R5          |                |                     |               |
+| Requirement | Model / Domain                                                                                                               | Controller / Action                                                               | View / Screen                                                                                |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| R1          | `seedData`, `getMembers()`, `getRequests()`, `getDecisionForReq()`, `getRoles()`                                             | `startApp()` โหลดข้อมูลละให้ View มันแสดงผล                                       | `renderMembers()`, `renderRequests()`, `#currentUserSelect`, `#memberTable`, `#requestTable` |
+| R2          | `createRequest(reqId, targetId, newRole)`                                                                                    | `btnShowCreateForm.onclick`, `createRequestForm.onsubmit` เรียก `createRequest()` | `OpenCreateForm()`, `TargetSelected()`, `RoleSelected()`, `#createRequestForm`               |
+| R3          | `addDecision()`, `getVoters()`, `hasVoted()`                                                                                 | `bindVoteButtons()` คลิกอนุมัติไม่อนุมัติ แล้วเรียก`addDecision()`                | ปุ่ม `.btn-approve` / `.btn-reject` ใน `#requestTable`                                       |
+| R4          | `countVotes(reqId)` รวม APPROVE/REJECT ครบ 2 เสียง ปิดคำขอเป็น APPROVED/REJECTED ถ้า APPROVED เปลี่ยน `role` ของ `target_id` | หลัง `addDecision()` สำเร็จ เรียก `refreshRequests()` แสดงผงใหม่                  | `renderRequests()` แสดงstatus ใหม่, `renderMembers()`                                        |
+| R5          | return `{ ok: false, message }` ถ้ามันผิ validate                                                                            | ถ้า `!result.ok` เรียก `showError(result.message)` ไม่รีตาราง                     | `showError()`, `clearError()`, `#err-box`                                                    |
+
+
 
 
 ## 3. ผลการทดสอบ
@@ -31,6 +33,8 @@
 | T6   |              |                           |
 
 
+
+
 ## 4. ความแตกต่างระหว่างแบบที่ออกกับโปรแกรมจริง (ถ้ามี)
 
 ระบุไม่เกิน 3 ข้อ
@@ -40,10 +44,10 @@
 หากไม่ได้ใช้ ให้ระบุ **ไม่ได้ใช้ Generative AI**
 
 
-| เวลาโดยประมาณ | เครื่องมือ | ใช้เพื่ออะไร | นำคำแนะนำไปใช้อย่างไร |
-| ------------- | ---------- | ------------ | --------------------- |
-|               |            |              |                       |
-|               |            |              |                       |
-|               |            |              |                       |
+| เวลาโดยประมาณ | เครื่องมือ | ใช้เพื่ออะไร                         | นำคำแนะนำไปใช้อย่างไร |
+| ------------- | ---------- | ------------------------------------ | --------------------- |
+| 30 นาที       | Cursor     | ดูจุดที่มัน error ที่เขียน ตัวแปรผิด | ก็ปรับตาม แล้วแก้ไข   |
+| 20 นาที       | Gemini     | สรุป Req                             | นำไปเขียนเป็นโค้ดหลัก |
+|               |            |                                      |                       |
 
 
